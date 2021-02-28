@@ -8,15 +8,27 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=16:antialias=true:hinting=true
        , allDesktops = True
        , overrideRedirect = True
        , lowerOnStart = False
-       , commands = [
-                      Run Cpu ["-L","3","-H","50", "--normal","green","--high","red"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+       , commands = [ Run Date "%a %d-%m-%Y - %H:%M:%S" "date" 10 -- Current Date + Time
                     , Run Swap [] 10
-                    , Run Date "%a %d-%m-%Y %H:%M:%S:%" "date" 10
-		    , Run Com "uname" ["-r"] "" 3600
-                    , Run UnsafeStdinReader
-                    ]
+                    , Run Memory [ "-t","Mem: <usedratio>%" ] 10
+                    , Run Cpu [    "-L","3" -- Setting Low CPU load
+                                 , "-H","50" -- Setting High CPU load
+                                 , "--normal","green" -- Setting green for Noraml CPU load
+                                 ,"--high","red"] 10 -- Setting red for High CPU load
+                    , Run Battery [ "-t"
+                                  , "Battery: <acstatus>"
+                                  , "-L", "10" -- Setting Low Value
+                                  , "-H", "80" -- Setting High Value
+                                  , "-l", "darkred" -- Setting darkred for Low Value (10%)
+                                  , "-n", "lightblue" -- Setting lightblue for Normal Value (between 80% - 10%)
+                                  , "-h", "darkgreen" -- Setting darkgreen for High Value (80%)
+                                  , "--"
+                                       , "-o", "<left>% (<timeleft>)" -- Timeleft of Battery Charge
+                                       , "-O", "<fc=#dAA520>Charging</fc>" -- Chraging Status
+                                       , "-i", "<fc=#006000>Charged</fc>"] 10 -- Charged Status
+                    , Run Com "uname" [ "-r" ] "" 3600 -- Kernel Name
+                    , Run UnsafeStdinReader] -- StdinReader for Workspaces ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{ %uname%  %cpu% | %memory%  <fc=#ee9a00>%date%</fc>"
+       , template = " %UnsafeStdinReader% }{ %uname% | %battery% | %cpu% | %memory% + %swap% | <fc=#ee9a00>%date%</fc>"
 }
