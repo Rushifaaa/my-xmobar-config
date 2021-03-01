@@ -3,11 +3,12 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=16:antialias=true:hinting=true
        , border = TopB
        , bgColor = "black"
        , fgColor = "grey"
-       , alpha = 255
+       , alpha = 200
        , position = TopW L 100
        , allDesktops = True
        , overrideRedirect = True
        , lowerOnStart = False
+       , iconRoot = "/home/devil/.icons/"
        , commands = [ Run Date "%a %d-%m-%Y - %H:%M:%S" "date" 10 -- Current Date + Time
                     , Run Swap [] 10
                     , Run Memory [ "-t","Mem: <usedratio>%" ] 10
@@ -30,5 +31,5 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=16:antialias=true:hinting=true
                     , Run UnsafeStdinReader] -- StdinReader for Workspaces ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{ %uname% | %battery% | %cpu% | %memory% + %swap% | <fc=#ee9a00>%date%</fc>"
+       , template = " %UnsafeStdinReader% }{ <icon=linux.xpm/> %uname% | %battery% | %cpu% | %memory% + %swap% | <fc=#ee9a00>%date%</fc>"
 }
