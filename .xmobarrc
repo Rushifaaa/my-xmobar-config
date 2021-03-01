@@ -8,7 +8,7 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=16:antialias=true:hinting=true
        , allDesktops = True
        , overrideRedirect = True
        , lowerOnStart = False
-       , iconRoot = "/home/devil/.icons/"
+       , iconRoot = "/home/devil/.config/xmobar/icons"
        , commands = [ Run Date "%a %d-%m-%Y - %H:%M:%S" "date" 10 -- Current Date + Time
                     , Run Swap [] 10
                     , Run Memory [ "-t","Mem: <usedratio>%" ] 10
